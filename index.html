@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2f6b4f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vadini Villa">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Vadini Villa Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* Layout: phone-first home guide — photo hero, section views, fixed bottom tab bar */
+:root{
+  --bg:#f3f6f7; --surface:#ffffff; --fg:#17242b; --muted:#5d6e76; --line:#dde5e8;
+  --palm:#2f6b4f; --palm-soft:#e3efe8; --slate:#4b5f86; --slate-soft:#e6eaf3; --sun:#b5781c;
+  color-scheme:light;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Figtree",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 calc(96px + env(safe-area-inset-bottom,0px))}
+.hero{position:relative;margin:12px 0 18px;border-radius:18px;overflow:hidden;aspect-ratio:3/2;max-width:100%;background:var(--palm-soft)}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,25,0) 40%,rgba(10,20,25,.78))}
+.hero-text{position:absolute;left:18px;right:18px;bottom:16px;z-index:1;color:#fff}
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;opacity:.9}
+h1{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.05;margin:4px 0 4px;text-wrap:balance}
+.hero-text p{margin:0;font-size:14px;opacity:.92}
+h2{font-family:var(--display);font-weight:700;font-size:22px;margin:0 0 4px;text-wrap:balance}
+.lede{color:var(--muted);margin:0 0 16px;font-size:14px}
+h3{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:22px 0 8px}
+.view{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.rows{display:flex;flex-direction:column}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row .lbl{flex:1;min-width:0}
+.row .lbl b{display:block;font-weight:600}
+.row .lbl small{display:block;color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.code{font-family:var(--mono);font-size:15px;color:var(--fg);background:var(--slate-soft);padding:6px 10px;border-radius:8px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;max-width:58%;overflow-wrap:anywhere;text-align:left;font-variant-numeric:tabular-nums}
+.code:focus-visible,.btn:focus-visible,.tab:focus-visible,.chip:focus-visible,a:focus-visible{outline:2px solid var(--palm);outline-offset:2px}
+.code svg{flex:none;opacity:.6}
+.code.ok{background:var(--palm-soft);color:var(--palm)}
+.note{font-size:13px;color:var(--muted);padding:0 14px 12px;margin-top:-6px}
+.trash{display:flex;gap:14px;align-items:center;padding:14px}
+.day{flex:none;width:58px;height:58px;border-radius:12px;background:var(--palm);color:var(--bg);display:grid;place-items:center;text-align:center;font-family:var(--display);font-weight:700;line-height:1}
+.day span{display:block;font-size:10px;letter-spacing:.1em;font-family:var(--body);font-weight:600;margin-bottom:2px}
+.trash b{display:block}
+.trash small{color:var(--muted);font-size:13px}
+.bin-week{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--palm-soft);color:var(--palm)}
+.pill.alt{background:var(--slate-soft);color:var(--slate)}
+.pill.warn{background:transparent;border:1px solid var(--sun);color:var(--sun)}
+.provider{padding:14px}
+.provider+.provider{border-top:1px solid var(--line)}
+.provider .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.provider .cat{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.provider .name{font-family:var(--display);font-weight:700;font-size:18px;margin:2px 0}
+.provider .meta{color:var(--muted);font-size:13px;overflow-wrap:anywhere}
+.actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;font:600 14px var(--body);text-decoration:none;padding:9px 14px;border-radius:10px;background:var(--palm);color:var(--bg);border:0;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.phone{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin:0 0 12px;scrollbar-width:none}
+.chip{flex:none;font:600 13px var(--body);padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.amen{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:12px 14px;border-top:1px solid var(--line)}
+.amen:first-child{border-top:0}
+.amen b{font-weight:600}
+.amen .hrs{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right;white-space:nowrap}
+.amen p{grid-column:1/-1;margin:2px 0 0;font-size:13px;color:var(--muted)}
+.amen .pill{justify-self:start;margin-top:4px;grid-column:1/-1}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.empty{padding:22px 16px;text-align:center}
+.empty b{display:block;font-family:var(--display);font-size:17px}
+.empty small{color:var(--muted);font-size:13px}
+.link{display:flex;align-items:center;gap:12px;padding:13px 14px;border-top:1px solid var(--line);text-decoration:none;color:var(--fg)}
+.link:first-child{border-top:0}
+.link div{flex:1;min-width:0}
+.link b{display:block;font-weight:600}
+.link small{display:block;color:var(--muted);font-size:13px}
+.link svg{flex:none;color:var(--muted)}
+.gig{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:11px 14px;border-top:1px solid var(--line);align-items:center}
+.gig:first-child{border-top:0}
+.gig .when{text-align:center;line-height:1.1}
+.gig .when span{display:block;font-size:10px;letter-spacing:.1em;font-weight:600;color:var(--muted)}
+.gig .when b{font-family:var(--display);font-size:20px}
+.gig.today .when b,.gig.today .when span{color:var(--palm)}
+.gig div{min-width:0}
+.gig .act{font-weight:600}
+.gig small{display:block;color:var(--muted);font-size:13px}
+.more{display:block;padding:12px 14px;border-top:1px solid var(--line);font-weight:600;color:var(--palm);text-decoration:none}
+.ask{font-size:13px;font-weight:600;color:var(--muted);background:var(--slate-soft);padding:6px 10px;border-radius:8px;white-space:nowrap}
+.quick .wide{grid-column:1/-1}
+.quick a{display:block;padding:14px;text-decoration:none;color:var(--fg)}
+.quick a b{display:block;font-family:var(--display);font-size:16px}
+.quick a small{color:var(--muted);font-size:12.5px}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.tabbar nav{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tab{background:none;border:0;color:var(--muted);font:600 11px var(--body);padding:9px 2px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.tab svg{width:22px;height:22px}
+.tab[aria-selected="true"]{color:var(--palm)}
+.toast{position:fixed;left:50%;bottom:calc(80px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;z-index:30}
+@media (prefers-reduced-motion:no-preference){.view:not([hidden]){animation:fade .18s ease-out}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <img src="house.jpg" alt="Front of 13852 Vadini Street with palm trees and a slate-blue garage door">
+    <div class="hero-text">
+      <div class="eyebrow">IslandWalk · Venice, FL</div>
+      <h1>Venice Vadini Villa</h1>
+      <p>13852 Vadini St · Quick essentials for the family</p>
+    </div>
+  </section>
+
+  <!-- HOME -->
+  <section class="view" id="v-home">
+    <h3>Wi-Fi</h3>
+    <div class="card rows">
+      <div class="row"><div class="lbl"><b>Home network</b><small>cavoli wifi</small></div><span class="ask">Ask us</span></div>
+      <div class="row"><div class="lbl"><b>IslandWalk community</b><small>IWResidents</small></div><span class="ask">Ask us</span></div>
+    </div>
+
+    <h3>Getting in</h3>
+    <div class="card rows">
+      <div class="row"><div class="lbl"><b>Front door</b><small>Press the Yale button to wake the keypad, then enter the code.</small></div><span class="ask">Ask us</span></div>
+      <div class="row"><div class="lbl"><b>Garage keypad</b><small>On the outside of the garage frame.</small></div><span class="ask">Ask us</span></div>
+      <div class="row"><div class="lbl"><b>Community gate</b><small>Say “Cavoli residence, 13852 Vadini St.”</small></div><span class="ask">Ask us</span></div>
+      <div class="row"><div class="lbl"><b>Mailbox #</b><small>Cluster box · 3 keys on the counter</small></div><button class="code" data-copy="2372">2372</button></div>
+    </div>
+
+    <h3>Trash &amp; recycling</h3>
+    <div class="card trash">
+      <div class="day"><div><span>EVERY</span>TUE</div></div>
+      <div>
+        <b>Roll bins to the curb Monday night</b>
+        <small>Sarasota County curbside pickup</small>
+        <div class="bin-week"><span class="pill">Garbage · weekly</span><span class="pill alt">Recycling · every other week</span></div>
+      </div>
+    </div>
+
+    <h3>Gate &amp; online portals</h3>
+    <div class="card">
+      <div class="provider">
+        <div class="cat">Voice gate system</div>
+        <div class="name phone">239-920-7625</div>
+        <div class="meta">When prompted, say “Cavoli residence, 13852 Vadini St.”</div>
+        <div class="actions">
+          <a class="btn" href="tel:2399207625">Call gate</a>
+          <button class="btn ghost phone" data-copy="239-920-7625">239-920-7625</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="portals" style="margin-top:10px"></div>
+
+    <h3>More</h3>
+    <div class="quick">
+      <a class="card" href="#services" data-go="services"><b>Service pros</b><small>AC, pest control, landscaping, TV</small></a>
+      <a class="card" href="#local" data-go="local"><b>Local</b><small>Events, live music, parks and food</small></a>
+      <a class="card wide" href="#amenities" data-go="amenities"><b>Amenities</b><small>Pools, courts, clubhouse, dog park: hours and booking rules</small></a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="view" id="v-services" hidden>
+    <h2>Service pros</h2>
+    <p class="lede">Who to call if something needs fixing at the house.</p>
+        <div class="card" id="providers"></div>
+      </section>
+
+  <!-- LOCAL -->
+  <section class="view" id="v-local" hidden>
+    <h2>Local</h2>
+    <p class="lede">What's happening around Venice and Wellen Park.</p>
+    <h3 id="musicHead">Live music at Downtown Wellen Park</h3>
+    <div class="card" id="music"></div>
+    <h3>Events</h3>
+    <div class="card" id="lkEvents"></div>
+    <h3>Live music</h3>
+    <div class="card" id="lkMusic"></div>
+    <h3>Parks &amp; trails</h3>
+    <div class="card" id="lkOutdoors"></div>
+    <h3>Food</h3>
+    <div class="card" id="lkFood"></div>
+  </section>
+
+  <!-- AMENITIES -->
+  <section class="view" id="v-amenities" hidden>
+    <h2>Amenities</h2>
+    <p class="lede">Bring your fob. Courts are booked online; HOA rooms go through the HOA.</p>
+    <div class="actions" style="margin:0 0 14px">
+      <a class="btn" href="https://reservemycourt.com/login" target="_blank" rel="noopener">Book a court</a>
+      <a class="btn ghost" href="https://islandwalkrec.com/" target="_blank" rel="noopener">Rec schedules</a>
+    </div>
+    <div class="chips" role="group" aria-label="Filter amenities" id="chips"></div>
+    <div class="card" id="amenList"></div>
+  </section>
+</div>
+
+<div class="tabbar"><nav role="tablist" id="tabs"></nav></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const providers=[
+  {cat:"HVAC",name:"Bowersox AC",who:"Dispatch",email:"maintenance@bowersoxair.com",phone:"941-303-5890"},
+  {cat:"Pest control",name:"HomeTeam Pest Defense",who:"Service desk",email:"puntagorda@pestdefense.com",phone:"941-467-1315"},
+  {cat:"Landscaping",name:"Juniper",who:"Section 3 team · junipersync.com",email:"islandwalkvenice@juniperlandscaping.com",phone:"941-222-1144"},
+  {cat:"Cable & TV",name:"Hotwire Fision",who:"Support line",phone:"1-800-357-1509"}
+];
+const portals=[
+  {cat:"Recreation",name:"Court reservations",meta:"Tennis, pickleball and bocce",url:"https://reservemycourt.com/login"},
+  {cat:"Management",name:"HOA portal (TownSq)",meta:"Dues, announcements and rules",url:"https://app.townsq.io/login"},
+  {cat:"Gate security",name:"Visitor management",meta:"Add guest and vendor passes",url:"https://webapp.tekcontrol-site.com/"}
+];
+const amen=[
+  ["Resort pools","First come","Dawn–dusk","Aquatics","Fob needed at the gate. No lifeguard."],
+  ["Spas","First come","Dawn–dusk","Aquatics","Next to the resort pool deck. 15-minute limit."],
+  ["Fitness centers & movement rooms","First come","5am–10pm","Sports & Fitness","Fob access required."],
+  ["Pickleball courts","Book online","7:30am–10pm","Sports & Fitness","Reserve at reservemycourt.com"],
+  ["Tennis courts","Book online","7:30am–10pm","Sports & Fitness","Reserve at reservemycourt.com"],
+  ["Bocce courts","Book online","7:30am–10pm","Sports & Fitness","Reserve at reservemycourt.com"],
+  ["Basketball court","First come","Dawn–dusk","Sports & Fitness","On the Clubhouse campus."],
+  ["Clubhouse pavilion","First come","Dawn–10pm","Clubhouse & Social","Open-air gathering space by the pool deck."],
+  ["Game room","First come","Open hours","Clubhouse & Social","Fob at the door. Billiards, darts, ping-pong."],
+  ["Library","First come","Open hours","Clubhouse & Social","In the Resort Center. Two resident computers."],
+  ["Clubhouse lanai","HOA reserve","9am–10pm","Clubhouse & Social","Covered outdoor seating."],
+  ["Clubhouse multi-purpose rooms","HOA reserve","9am–10pm","Clubhouse & Social","For private or club events."],
+  ["Event Center rooms & kitchen","HOA reserve","9am–10pm","Clubhouse & Social","Full catering kitchen and banquet space."],
+  ["Resort Center community room","HOA reserve","7am–10pm","Clubhouse & Social","Multi-use meeting and activity room."],
+  ["Resort Center lanai","HOA reserve","7am–10pm","Clubhouse & Social","Screened patio."],
+  ["Arts & crafts room","HOA reserve","7am–10pm","Clubhouse & Social","For community activities."],
+  ["Grills","First come","8am–10pm","Outdoors","By the Event Center, Resort Center lanai and Clubhouse pavilion."],
+  ["Fire pits","First come","Evening–10pm","Outdoors","Propane. Behind the Event Center and on the Clubhouse pool deck."],
+  ["Dog park","First come","Dawn–dusk","Outdoors","Large and small dog sides. Rabies vaccine must be current."],
+  ["Playground","First come","Dawn–dusk","Outdoors","Under 16 only, with an adult."]
+];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const digits=p=>p.replace(/\D/g,"");
+const callBtns=p=>`<a class="btn" href="tel:${digits(p)}">Call</a><button class="btn ghost phone" data-copy="${p}">${p}</button>`;
+
+document.getElementById("providers").innerHTML=providers.map(p=>`<div class="provider"><div class="cat">${esc(p.cat)}</div><div class="name">${esc(p.name)}</div><div class="meta">${esc(p.who)}${p.email?`<br>${esc(p.email)}`:""}</div><div class="actions">${callBtns(p.phone)}</div></div>`).join("");
+document.getElementById("portals").innerHTML=portals.map(p=>`<div class="provider"><div class="cat">${esc(p.cat)}</div><div class="name">${esc(p.name)}</div><div class="meta">${esc(p.meta)}</div><div class="actions"><a class="btn" href="${p.url}" target="_blank" rel="noopener">Open</a></div></div>`).join("");
+
+const SHEET="https://docs.google.com/spreadsheets/d/1hOKaNu2l5pE89XP05zHAjrN-2M1yVV785EIwgELrTGU/edit?gid=0#gid=0";
+const local={
+  lkEvents:[["Wellen Park events","Festivals, markets and Downtown happenings","https://wellenpark.com/events/"],["Venice events calendar","Visit Venice citywide calendar","https://www.visitvenicefl.org/calendar/"],["Venice Main Street events","Downtown Venice events","https://www.visitvenicefl.org/venice-mainstreet-events/"],["Venice Nights","What's on around Venice (Facebook)","https://www.facebook.com/veniceflnights/"]],
+  lkMusic:[["Wellen Park live music schedule","Full Downtown Wellen Park lineup (Google Sheet)",SHEET],["Pop's Sunset Grill","Entertainment schedule","https://www.popssunsetgrill.com/entertainment/"],["Kara Nally Band","Shows and updates (Facebook)","https://www.facebook.com/KaraNallyBandSRQ/"]],
+  lkOutdoors:[["Wellen Park bike trails","Trails and pathways map (PDF)","https://wellenpark.com/wp-content/uploads/2025/10/Wellen-Park_TrailsPathway_Map.pdf"],["Sarasota County parks","Find a park, beach or preserve","https://www.sarasotacountyparks.com/parks-and-facilities/discover-a-park"]],
+  lkFood:[["Bocca Lupo Pizza","Pizza","https://boccalupopizza.com/"]]
+};
+const ext='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
+for(const id in local)document.getElementById(id).innerHTML=local[id].map(([n,d,u])=>`<a class="link" href="${u}" target="_blank" rel="noopener"><div><b>${esc(n)}</b><small>${esc(d)}</small></div>${ext}</a>`).join("");
+let gigs=[["2026-10-01", "6pm-9pm", "Steve Arvey", "Heritage Tree", ""], ["2026-10-02", "6pm-9pm", "Ashley Lux", "Solis Hall Stage", ""], ["2026-10-03", "", "DeLeon Polka Band", "Downtown Wellen Park", "Oktoberfest"], ["2026-10-03", "", "German Dancers", "Downtown Wellen Park", "Oktoberfest"], ["2026-10-04", "9am-1pm", "Zack Pomerleau", "Heritage Tree", ""], ["2026-10-05", "6pm-9pm", "Tom Heiden", "Heritage Tree", ""], ["2026-10-06", "6pm-9pm", "Gary Schutt", "Heritage Tree", ""], ["2026-10-07", "6pm-9pm", "Roger Cummings", "Heritage Tree", ""], ["2026-10-08", "6pm-9pm", "Dueling Pianos", "Solis Hall Stage", ""], ["2026-10-09", "6pm-9pm", "NoFilter", "Solis Hall Stage", ""], ["2026-10-10", "6pm-9pm", "Durik Comtois Duo", "Heritage Tree", ""], ["2026-10-11", "9am-1pm", "Casey Church Duo", "Heritage Tree", ""], ["2026-10-12", "6pm-9pm", "Savannah Brady", "Heritage Tree", ""], ["2026-10-13", "6pm-9pm", "Branco Costa", "Heritage Tree", ""], ["2026-10-14", "6pm-9pm", "Courtney Amber", "Heritage Tree", ""], ["2026-10-15", "6pm-9pm", "Eric Bailey", "Heritage Tree", ""], ["2026-10-16", "6pm-9pm", "TL Jentgens", "Solis Hall Stage", ""], ["2026-10-17", "6pm-9pm", "High & Dry", "Heritage Tree", ""], ["2026-10-18", "9am-1pm", "Duane + Steve", "Heritage Tree", ""], ["2026-10-19", "6pm-9pm", "Adriana McDonald", "Heritage Tree", ""], ["2026-10-20", "6pm-9pm", "Casey Church", "Heritage Tree", ""], ["2026-10-21", "6pm-9pm", "Tom Heiden", "Heritage Tree", ""], ["2026-10-22", "6pm-9pm", "Dueling Pianos", "Solis Hall Stage", ""], ["2026-10-23", "7:00 PM", "Night of Worship", "Solis Hall Stage", ""], ["2026-10-25", "9am-1pm", "Rob Hazen", "Heritage Tree", ""], ["2026-10-26", "6pm-9pm", "Zack Pomerleau", "Heritage Tree", ""], ["2026-10-27", "6pm-9pm", "Steve Arvey", "Heritage Tree", ""], ["2026-10-28", "6pm-9pm", "Savannah Brady", "Heritage Tree", ""], ["2026-10-29", "6pm-9pm", "Sebastian", "Heritage Tree", ""], ["2026-10-30", "6pm-9pm", "DJ Dax", "Downtown Wellen Park", "Spooktacular"], ["2026-10-30", "6pm-9pm", "Funkey Bonez", "Downtown Wellen Park", "Spooktacular"], ["2026-10-31", "6pm-9pm", "High & Dry", "Heritage Tree", ""], ["2026-11-01", "9am-1pm", "Duane + Steve", "Heritage Tree", ""], ["2026-11-02", "6pm-9pm", "Branco Costa", "Heritage Tree", ""], ["2026-11-03", "6pm-9pm", "Steve Arvey", "Heritage Tree", ""], ["2026-11-04", "6pm-9pm", "Sebastian", "Heritage Tree", ""], ["2026-11-05", "6pm-9pm", "Tom Heiden", "Heritage Tree", ""], ["2026-11-06", "6pm-9pm", "NoFilter", "Solis Hall Stage", ""], ["2026-11-07", "6pm-9pm", "Derek Roura Duo", "Heritage Tree", ""], ["2026-11-08", "9am-1pm", "Joe Sax", "Heritage Tree", ""], ["2026-11-09", "6pm-9pm", "Zack Pomerleau", "Heritage Tree", ""], ["2026-11-10", "6pm-9pm", "Gary Schutt", "Heritage Tree", ""], ["2026-11-11", "6pm-9pm", "Savannah Brady", "Heritage Tree", ""], ["2026-11-12", "6pm-9pm", "Dueling Pianos", "Solis Hall Stage", ""], ["2026-11-13", "6pm-9pm", "Coming Soon", "Heritage Tree", ""], ["2026-11-14", "6pm-9pm", "Jewel Tones", "Wine Festival", ""], ["2026-11-14", "6pm-9pm", "Branco Costa", "Wine Festival", ""], ["2026-11-14", "6pm-9pm", "Ruth Morales", "Heritage Tree", ""], ["2026-11-15", "9am-1pm", "High & Dry", "Heritage Tree", ""], ["2026-11-16", "6pm-9pm", "Courtney Amber", "Heritage Tree", ""], ["2026-11-17", "6pm-9pm", "Eric Bailey", "Heritage Tree", ""], ["2026-11-18", "6pm-9pm", "Casey Church", "Heritage Tree", ""], ["2026-11-19", "6pm-9pm", "Branco Costa", "Heritage Tree", ""], ["2026-11-20", "6pm-9pm", "Tiger Blue", "Solis Hall Stage", ""], ["2026-11-21", "6pm-9pm", "Totally B", "Arts Festival", ""], ["2026-11-22", "9am-1pm", "Jewel Tones", "Arts Festival", ""], ["2026-11-23", "6pm-9pm", "Tom Heiden", "Heritage Tree", ""], ["2026-11-24", "6pm-9pm", "Steve Arvey", "Heritage Tree", ""], ["2026-11-25", "6pm-9pm", "Zack Pomerleau", "Heritage Tree", ""], ["2026-11-26", "6pm-9pm", "Dueling Pianos", "Solis Hall Stage", ""], ["2026-11-27", "6pm-9pm", "Jewel Tones", "Solis Hall Stage", ""], ["2026-11-28", "6pm-9pm", "Durik Comtois", "Heritage Tree", ""], ["2026-11-29", "9am-1pm", "Grace Burke", "Heritage Tree", ""], ["2026-11-30", "6pm-9pm", "Savannah Brady", "Heritage Tree", ""], ["2026-12-01", "6pm-9pm", "Steve Arvey", "Heritage Tree", ""], ["2026-12-02", "6pm-9pm", "Tom Heiden", "Heritage Tree", ""], ["2026-12-03", "6pm-9pm", "Branco Costa", "Heritage Tree", ""], ["2026-12-04", "6pm-9pm", "NoFilter", "Downtown Wellen Park", "Wellen Wonderland"], ["2026-12-04", "6pm-9pm", "Santa", "Downtown Wellen Park", "Wellen Wonderland"], ["2026-12-04", "6pm-9pm", "American Sirens", "Downtown Wellen Park", "Wellen Wonderland"], ["2026-12-04", "6pm-9pm", "Ice Dancers", "Downtown Wellen Park", "Wellen Wonderland"], ["2026-12-05", "6pm-9pm", "Dueling Pianos", "Downtown Wellen Park", "Wellen Wonderland"], ["2026-12-05", "6pm-9pm", "Santa", "Downtown Wellen Park", "Wellen Wonderland"], ["2026-12-06", "", "Nightbreakers Duo", "Heritage Tree", ""], ["2026-12-07", "6pm-9pm", "Gary Schutt", "Heritage Tree", ""], ["2026-12-08", "6pm-9pm", "Savannah Brady", "Heritage Tree", ""], ["2026-12-09", "6pm-8pm", "Chanukah Concert", "Solis Hall Stage", ""], ["2026-12-10", "6pm-9pm", "Blake Guyre", "Solis Hall Stage", ""], ["2026-12-11", "6pm-9pm", "Occasions", "Solis Hall Stage", ""], ["2026-12-12", "6pm-9pm", "Rotary", "Heritage Tree", ""], ["2026-12-13", "9am-1pm", "Adriana McDonald", "Heritage Tree", ""], ["2026-12-14", "6pm-9pm", "Casey Church", "Heritage Tree", ""], ["2026-12-15", "6pm-9pm", "Sebastian", "Heritage Tree", ""], ["2026-12-16", "6pm-9pm", "Deven Starr", "Heritage Tree", ""], ["2026-12-17", "6pm-9pm", "Rob Hazen", "Heritage Tree", ""], ["2026-12-18", "6pm-9pm", "Rich Church", "Solis Hall Stage", ""], ["2026-12-19", "6pm-9pm", "Stick & Ditty", "Heritage Tree", ""], ["2026-12-20", "9am-1pm", "Derek Roura Duo", "Heritage Tree", ""], ["2026-12-21", "6pm-9pm", "Branco Costa", "Heritage Tree", ""], ["2026-12-22", "6pm-9pm", "Steve Arvey", "Heritage Tree", ""], ["2026-12-23", "6pm-9pm", "Tom Heiden", "Heritage Tree", ""], ["2026-12-24", "6pm-9pm", "Derek Roura", "Heritage Tree", ""], ["2026-12-25", "6pm-9pm", "Grace Burke", "Heritage Tree", ""], ["2026-12-26", "6pm-9pm", "High & Dry", "Heritage Tree", ""], ["2026-12-27", "9am-1pm", "Jewel Tones", "Heritage Tree", ""], ["2026-12-28", "6pm-9pm", "Courtney Amber", "Heritage Tree", ""], ["2026-12-29", "6pm-9pm", "Savannah Brady", "Heritage Tree", ""], ["2026-12-30", "6pm-9pm", "Zack Pomerleau", "Heritage Tree", ""], ["2026-12-31", "", "Crossfire Creek", "Solis Hall Stage", "New Year's Eve"]];
+function drawGigs(){
+  const now=new Date(),pad=n=>String(n).padStart(2,"0");
+  const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  const today=iso(now),end=new Date(now);end.setDate(end.getDate()+7);const endIso=iso(end);
+  const up=gigs.filter(g=>g[0]>=today&&g[0]<endIso);
+  const days=["SUN","MON","TUE","WED","THU","FRI","SAT"],mons=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  document.getElementById("musicHead").textContent="Live music at Downtown Wellen Park · next 7 days";
+  const body=up.length?up.map(g=>{const d=new Date(g[0]+"T12:00:00");const t=g[0]===today;
+    return `<div class="gig${t?" today":""}"><div class="when"><span>${t?"TODAY":days[d.getDay()]}</span><b>${d.getDate()}</b><span>${mons[d.getMonth()]}</span></div><div><div class="act">${esc(g[2])}</div><small>${esc([g[1],g[3],g[4]].filter(Boolean).join(" · "))}</small></div></div>`}).join("")
+    :`<div class="empty"><b>No shows listed this week</b><small>The saved lineup runs through Dec 31, 2026.</small></div>`;
+  document.getElementById("music").innerHTML=body+`<a class="more" href="${SHEET}" target="_blank" rel="noopener">See the full schedule ›</a>`;
+}
+drawGigs();
+// Pull the latest lineup straight from the public Google Sheet; keep the built-in copy if that fails.
+(async function(){
+  try{
+    const url="https://docs.google.com/spreadsheets/d/1hOKaNu2l5pE89XP05zHAjrN-2M1yVV785EIwgELrTGU/gviz/tq?tqx=out:csv&gid=0&headers=0";
+    const res=await fetch(url,{cache:"no-store"});
+    if(!res.ok)return;
+    const text=await res.text();
+    const rows=[];
+    for(const line of text.split(/\r?\n/)){
+      const cells=[];let cur="",q=false;
+      for(let i=0;i<line.length;i++){const ch=line[i];
+        if(q){if(ch=='"'&&line[i+1]=='"'){cur+='"';i++}else if(ch=='"')q=false;else cur+=ch}
+        else if(ch=='"')q=true;else if(ch==","){cells.push(cur.trim());cur=""}else cur+=ch}
+      cells.push(cur.trim());
+      const m=(cells[0]||"").match(/^(\d{1,2})\/(\d{1,2})\/(\d{2}|\d{4})$/);
+      if(!m)continue;
+      const y=m[3].length==2?2000+ +m[3]:+m[3];
+      const act=cells[2]||"";if(!act||act=="0")continue;
+      let venue=cells[3]||"",note=cells[4]||"",time=cells[1]||"";
+      if(venue&&venue===venue.toUpperCase()&&/[A-Z]/.test(venue)){note=venue.toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());venue="Downtown Wellen Park"}
+      const iso=y+"-"+String(m[1]).padStart(2,"0")+"-"+String(m[2]).padStart(2,"0");
+      if(!rows.some(r=>r[0]==iso&&r[2]==act))rows.push([iso,time,act,venue,note]);
+    }
+    if(rows.length>20){gigs=rows;drawGigs()}
+  }catch(e){}
+})();
+
+const cats=["All","Sports & Fitness","Aquatics","Clubhouse & Social","Outdoors"];
+let cat="All";
+function drawAmen(){
+  document.getElementById("chips").innerHTML=cats.map(c=>`<button class="chip" aria-pressed="${c===cat}" data-cat="${c}">${esc(c)}</button>`).join("");
+  document.getElementById("amenList").innerHTML=amen.filter(a=>cat==="All"||a[3]===cat).map(a=>{
+    const cls=a[1]==="Book online"?"":a[1]==="HOA reserve"?" alt":" warn";
+    return `<div class="amen"><b>${esc(a[0])}</b><span class="hrs">${esc(a[2])}</span><p>${esc(a[4])}</p><span class="pill${cls}">${esc(a[1])}</span></div>`}).join("");
+}
+drawAmen();
+document.getElementById("chips").addEventListener("click",e=>{const b=e.target.closest("[data-cat]");if(b){cat=b.dataset.cat;drawAmen()}});
+
+const icons={
+  home:'<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  services:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>',
+  utilities:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+  local:'<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  community:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4.5a3 3 0 0 1 0 6M18 14c2 .7 3 2.8 3 6"/>',
+  amenities:'<path d="M2 18c2 0 2-1.5 4-1.5S8 18 10 18s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><path d="M7 15V5a2 2 0 0 1 4 0M15 15V5a2 2 0 0 0-4 0M7 9h8"/>'
+};
+const tabs=[["home","Home"],["services","Pros"],["local","Local"],["amenities","Amenities"]];
+document.getElementById("tabs").innerHTML=tabs.map(([k,l])=>`<button class="tab" role="tab" data-go="${k}" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icons[k]}</svg>${l}</button>`).join("");
+function go(k,scroll){
+  if(k==="utilities")k="services";
+  if(k==="community")k="home";
+  if(!tabs.some(t=>t[0]===k))k="home";
+  document.querySelectorAll(".view").forEach(v=>v.hidden=v.id!=="v-"+k);
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.go===k));
+  try{history.replaceState(null,"","#"+k)}catch(e){}
+  if(scroll){const h=document.querySelector(".hero");window.scrollTo({top:k==="home"?0:h.offsetTop+h.offsetHeight,behavior:"instant"})}
+}
+document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){e.preventDefault();go(g.dataset.go,true)}});
+go((location.hash||"").slice(1)||"home",false);
+
+const toast=document.getElementById("toast");let tt;
+function say(m){toast.textContent=m;toast.hidden=false;clearTimeout(tt);tt=setTimeout(()=>toast.hidden=true,1600)}
+const copyIcon='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>';
+document.querySelectorAll(".code").forEach(b=>b.insertAdjacentHTML("beforeend",copyIcon));
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-copy]");if(!b)return;
+  const v=b.dataset.copy;
+  const done=()=>{b.classList.add("ok");say("Copied "+v);setTimeout(()=>b.classList.remove("ok"),1200)};
+  try{navigator.clipboard.writeText(v).then(done,()=>{selectText(b);say("Selected. Tap Copy.")})}catch(err){selectText(b);say("Selected. Tap Copy.")}
+});
+function selectText(el){try{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r)}catch(e){}}
+</script>
+</body>
+</html>
